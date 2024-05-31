@@ -1,0 +1,149 @@
+MarioPartyGame class:
+
+Instance Variables:
+private int players;
+private Maps map;
+private int maxTurns;
+private int firstPlayer;
+private int currentTurn;
+private ArrayList<String> maps;
+private ArrayList<Player> playerOrder;
+
+Constructor:
+public MarioPartyGame (int players, Maps map, int maxTurns) (Max players of 4, map is part of map pool, and max turns of 40.)
+public MarioPartyGame()
+
+Methods Created
+public int diceRoll() (simulates the roll of two dies and returns the total as an integer)
+public boolean isMap(String map) (checks to see if the map chosen is valid. True if yes, false otherwise)
+public int determineFirst(ArrayList<Player> players) (randomly chooses who goes first and then creates an order of players that the game will played on)
+public boolean validAmountOfTurns(int turns) (checks to see if the amount of turns chosen is valid for the game. True if yes, false otherwise)
+public boolean gameOver(int currentTurn) (Will set to true if the game is over by seeing if the current turn has gone over the max turns that was set. False otherwise)
+public ArrayList<Player> getOrderOfPlayers() (Gets the order of players as an arraylist)
+public String winner() (Determines who won the game)
+
+Player class:
+
+Instance Variables:
+private ArrayList<String> playerInventory;
+private int playerCoins;
+private int playerSpace;
+private String name;
+private Maps map;
+private boolean doubled;
+private boolean passedStar;
+private int stars;
+private boolean turnOver;
+private MarioPartyGame gameLogic;
+boolean isBot;
+private Items itemLogic;
+public int currentSpacesMoved;
+private boolean cursedBlockActive;
+public boolean halfwayDiceActive;
+public ArrayList<Player> players;
+
+Constructor:
+public Player(Maps currentMap, boolean isBot) (The current map the player is playing on, wiether or not the player is an added bot)
+
+Methods Created
+public ArrayList<String> getPlayerInventory() (returns a string of the items in the player's inventory)
+public void addToInventory(String item) (adds an item to a players inventory).
+public void setName(String name) (sets the player's name to the input)
+public String getName() (returns the player's name)
+public String updatePlayerSpace(int spacesMoved, Player player) (updates the player's space given the number of spaces they have to move and then returns the results)
+public int currentPlayerSpace() (returns the player's current space)
+public boolean passedStar() (returns true if the player passed a star. False otherwise)
+public void updatePlayerCoins(int coins) (Updates the amount of coins a player has)
+public int amountOfCoins() (returns the amount of coins a player has as an integer)
+public boolean haveItem(String item) (returns true if the player's inventory contains the item that the user inputted)
+public int amountOfStars() (returns the amount of stars the player has as an integer)
+public void updateStars() (adds a star the the player's current amount)
+public String bowserSpaceResults() (returns the effect of landing on a bowser space)
+public String luckySpaceResults() (returns the effect of landing on a luckyspace)
+public String itemSpaceResults() (returns the effect of landing on an item space)
+public String buyStar(String answer) (simulates buying a star. If the answer is "yes", then the player gains a star)
+public boolean isTurnOver() (returns true if the player's turn is determined as over)
+public String actionSelected(int actionNum, Player player) (returns a String that is the effect of the action the user selected)
+public void endOfTurn() (sets the player's turnOver to true)
+public String botAction(Player bot, ArrayList<Player> players) (simulates an AI or a bot's turn. Returns the result of the turn as a string)
+public String useItem(String item, Player player, ArrayList<Player> players) (simulates using an item and returns it's effect has a string)
+public void changeSpacesMoved(int change) (adds the change to the amount of spaces the player will move)
+public void cursedBlockActive() (sets cursedBlockActive to true. Makes it so a player can only roll a number from 1-3)
+public void halfwayDiceActive() (sets halfwayDiceActive to true. Makes it so a player can only roll a number from 1-5)
+public void setPlayerSpace(int space) (sets the player's current space to whatever was inputted)
+public void setPlayers(ArrayList<Player> players) (sets the player list for a player)
+
+Maps class:
+
+Instance Variables:
+private String map;
+private int maxSpaces;
+private int startingSpace;
+private ArrayList<Integer> blueSpaces;
+private ArrayList<Integer> redSpaces;
+private int starSpace;
+private ArrayList<Integer> bowserSpaces;
+private ArrayList<Integer> luckySpaces;
+private ArrayList<Integer> itemSpaces;
+
+Constructor:
+public Maps(String map) (The map that was chosen from the map pool)
+
+Methods Created
+public void setUpMap() (Sets up the map by giving it it's own unique spaces and a star space)
+public ArrayList<Integer> getBlueSpaces() (returns an integer list of blue spaces)
+public String newStarSpace() (sets the star space to a random space on the map)
+public ArrayList<Integer> getRedSpaces() (returns an integer list of redspaces)
+public int getStarSpace() (returns the current star's space)
+public int getMaxSpaces() (returns the amount of max spaces the map has)
+public ArrayList<Integer> getBowserSpaces() (returns an integer list of bowserspaces)
+public ArrayList<Integer> getLuckySpaces() (returns an integer list of luckyspaces)
+public ArrayList<Integer> getItemSpaces() (returns an integer list of itemspaces)
+public String mapDetails() (Returns a string which state the map that is being played on and it's spaces)
+
+Items class:
+
+Instance Variables:
+private ArrayList<String> gameItems;
+private ArrayList<Player> players;
+
+Constructor:
+public Items(ArrayList<Player> players) (Players that will be using these items)
+public Items() (More of a bug fixer and make it easier to call method)
+
+Methods Created
+public ArrayList<String> getGameItems() (returns a String list of items that are being used in the game)
+public int getAmountOfItems() (returns an integer of how many items are being used in the game)
+public String itemEffects(String item, Player player) (determines the effect of the item that was used has on the player who used it and to other players)
+
+MarioPartyGameRunner class:
+1. Import need java utl
+2. Print details about the game and how it works
+3. Ask the user what map they want to play (If not a valid map, ask the user again)
+4. Initialize userMap String to user input.
+5. Ask the user how many people are playing (If not a valid amount, ask the user again)
+6. Initialize playerAmount integer to user input.
+7. Using playerAmount, create an array list of Player objects and initilaize the list to players.
+8. Ask the user how many turns they want to play(If not a valid amount, ask the user again)
+9. Initialize maxTurns integer to user input.
+10. Create a MarioPartyGame object using the 3 variables that were initialized
+11. Create an Items object using the players variable.
+12. Use the setUpMap() method to set up the map
+13. Use mapDetails() in print statement to print out the map details
+14. Use determineFirst() with players as the input and print out the result
+15. Create and initialize integer currentTurn to 1.
+16. Create and initialize integer userAnswer to 0.
+17. Create a loop that will only stop if gameOver() is true. From 18-28 , it will be inside loop
+18. Inside the loop, print out the current turn
+19. Create a for loop that will repeat 4 times From 20- 27, it will be inside this loop
+20. Create a while loop thjat will only stop if isTurnOver() is true From 21- 26, it will be inside this loop
+21. Each loop has currentPlayerTurn initialized to the current player using the getOrderOfPlayers() method
+22. If the player isn't a bot, ask them what they would like to do for their turn. If 1, roll dice. If 2, ask what item they would like to use. Will repeat until 1 is chosen.  From 22- 24, it will be if isBot() is false
+23. Put userAnswer into the actionSelected() method and print out the result
+24. Create an if statement that checks to see if passedStar() of the current player is true and if they have over 20 coins
+25. If true, ask them if they want to buy a star. Use buyStar() method with the userAnswer as input and print out the results. If passedStar() is true but they don't have over 20 coins, print out how they couldn't afford the star.
+26. If isBot() is true, then use botAction() method and print out results
+27. Set current player's turnOver to true using the endOfTurn() method
+28. Increment currentTurn by 1.
+29. Print out how the turns have all ended
+30. Print out how many stars everyone got and who won using the winner() method
